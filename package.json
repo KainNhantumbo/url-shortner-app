@@ -1,8 +1,14 @@
 {
-  "name": "url-shortner",
+  "name": "url-shortner-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": {
+		"name": "Kain Nhantumbo",
+		"email": "nhantumbok@gmail.com",
+		"url": "https://portifolio-dev-mu.vercel.app"
+	},
+	"license": "Apache License Version 2.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
