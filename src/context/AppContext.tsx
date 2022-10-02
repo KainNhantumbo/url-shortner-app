@@ -16,7 +16,7 @@ export default function AppContext({ children }: IProps): JSX.Element {
 	return (
 		<ThemeProvider theme={lightTheme}>
 			<GlobalStylesheet />
-			<appContext.Provider value={{}}>{children}</appContext.Provider>;
+			<appContext.Provider value={{}}>{children}</appContext.Provider>
 		</ThemeProvider>
 	);
 }
