@@ -1,13 +1,68 @@
 import { HomeContainer as Container } from '../styles/home';
-import { useAppContext } from '../context/AppContext';
+import apiClient from '../service/api-client';
+import { useState, useEffect } from 'react';
+
+interface IUrls {
+	id: string;
+	longUrl: string;
+	shortUrl: string;
+	createdAt: string;
+}
 
 export default function Home(): JSX.Element {
-	const { urls, addToClipboard } = useAppContext();
+	const [inputValue, setInputValue] = useState<string>('');
+	const [urls, setUrls] = useState<IUrls[]>(() => {
+		const jsonValue = JSON.parse(localStorage.getItem('urls') || `[]`);
+		return jsonValue;
+	});
+
+	async function getShortUrl(longUrl: string): Promise<void> {
+		try {
+			const { data } = await apiClient({
+				url: '/urls/shorten',
+				method: 'post',
+				data: { url: longUrl },
+			});
+			setUrls((prevData) => handleData(prevData, data));
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
+	function handleData(prevData: IUrls[], data: any): IUrls[] {
+		const exists = prevData.some((value) =>
+			value.id === data._id ? true : false
+		);
+
+		if (!exists) {
+			const newUrlData: IUrls = {
+				id: data._id,
+				shortUrl: data.shortUrl,
+				createdAt: data.createdAt,
+				longUrl: data.fullUrl,
+			};
+
+			prevData.push(newUrlData);
+			localStorage.setItem('urls', JSON.stringify(prevData));
+			return prevData;
+		}
+		return prevData;
+	}
+
+	async function addToClipboard(data: string): Promise<void> {
+		try {
+			const clipboard = navigator.clipboard;
+			await clipboard.writeText(data);
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
 	return (
 		<Container>
 			<header>
 				<div className='intro'>
-					<section>
+					<section className='logo'>
 						<div>
 							<span>Url Shortner</span>
 						</div>
@@ -18,26 +73,43 @@ export default function Home(): JSX.Element {
 				</div>
 
 				<div className='intro-complement'>
-					<>Free url shortner</>
+					<h2>Free url shortner</h2>
 					<p>
 						Unleash the power of the click using a simple, powerful and free url
 						shortner.
 					</p>
-					<button>
+					<p>
+						A service that takes long urls and squeezes them into fewer
+						characters to make a link that is much easier to share to your
+						friends.
+					</p>
+					<a href='#article'>
 						<span>Get Started</span>
-					</button>
+					</a>
 				</div>
 			</header>
 			<main>
-				<article>
-					<form>
+				<article id='article'>
+					<form onSubmit={(e) => e.preventDefault()}>
 						<div>
 							<label htmlFor='long-url'>
 								<span>Your long url</span>
 							</label>
-							<input type="text" id='long-url' onChange={(e)=>{}} />
+							<input
+								type='text'
+								id='long-url'
+								value={inputValue}
+								onChange={(e) => setInputValue(e.target.value)}
+								placeholder={'Type your long url here'}
+							/>
 						</div>
-						<button type='submit'>
+						<button
+							onClick={() => {
+								if (!inputValue) return;
+								getShortUrl(inputValue);
+								setInputValue('');
+							}}
+						>
 							<span>Shorten</span>
 						</button>
 					</form>
@@ -52,9 +124,14 @@ export default function Home(): JSX.Element {
 										<span>{url.shortUrl}</span>
 									</div>
 								</div>
-								<button onClick={() => addToClipboard(url.shortUrl)}>
-									<span>Copy</span>
-								</button>
+								<div className='actions'>
+									<button onClick={() => addToClipboard(url.shortUrl)}>
+										<span>Clear</span>
+									</button>
+									<button onClick={() => addToClipboard(url.shortUrl)}>
+										<span>Copy to clipboard</span>
+									</button>
+								</div>
 							</section>
 						))}
 					</section>
