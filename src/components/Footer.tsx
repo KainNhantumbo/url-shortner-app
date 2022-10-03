@@ -1,5 +1,4 @@
 import { FooterContainer as Container } from '../styles/footer';
-import { FC } from 'react';
 import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { ImBlog, ImLinkedin2 } from 'react-icons/im';
 import { motion } from 'framer-motion';
@@ -39,7 +38,7 @@ const footerData: FooterLinks[] = [
 	},
 ];
 
-const Footer: FC = (): JSX.Element => {
+export default function Footer(): JSX.Element {
 	return (
 		<Container>
 			<section className='disclaimer'>
@@ -77,9 +76,8 @@ const Footer: FC = (): JSX.Element => {
 			<div>
 				<span>Url Shortner App - Version 0.9.0 (beta)</span>
 				<span>Copyright &copy; 2022 Kain Nhantumbo. All Rights Reserved. </span>
+				<span>Licensed under Apache License 2.0</span>
 			</div>
 		</Container>
 	);
-};
-
-export default Footer;
+}

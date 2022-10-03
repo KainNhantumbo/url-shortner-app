@@ -1,6 +1,7 @@
 import { HomeContainer as Container } from '../styles/home';
 import apiClient from '../service/api-client';
 import { useState, useEffect } from 'react';
+import moment from 'moment';
 import Footer from '../components/Footer';
 import backgroundImg from '../assets/images/op.jpg';
 import {
@@ -66,6 +67,10 @@ export default function Home(): JSX.Element {
 		} catch (err) {
 			console.error(err);
 		}
+	}
+
+	function formatDate (date: string): string {
+return moment(date).calendar()
 	}
 
 	return (
@@ -153,7 +158,7 @@ export default function Home(): JSX.Element {
 										</div>
 										<div className='actions-container'>
 											<div className='date'>
-												<span>{url.createdAt}</span>
+												<span>{formatDate(url.createdAt)}</span>
 											</div>
 											<div className='buttons'>
 												<button onClick={() => addToClipboard(url.shortUrl)}>
