@@ -161,9 +161,9 @@ export const HomeContainer = styled.div`
 					line-height: 1.6rem;
 					font-size: 1.2rem;
 					color: rgb(${({ theme }) => theme.primary});
-          display: flex;
-          gap: 8px;
-          flex-flow: row nowrap;
+					display: flex;
+					gap: 8px;
+					flex-flow: row nowrap;
 				}
 				.urls-container {
 					display: flex;
@@ -227,8 +227,8 @@ export const HomeContainer = styled.div`
 							}
 
 							.buttons {
-                display: flex;
-                gap: 10px;
+								display: flex;
+								gap: 10px;
 
 								button {
 									border: none;
@@ -263,5 +263,26 @@ export const HomeContainer = styled.div`
 				}
 			}
 		}
+	}
+
+	footer {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		background: rgb(${({ theme }) => theme.foreground});
+		border-radius: 20px 20px 0 0;
+		padding: 20px;
+    line-height: 1.6rem;
+    font-family: inter;
+
+		
+    div {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      span {
+        font-weight: 500;
+      }
+    }
 	}
 `;

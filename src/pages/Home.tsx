@@ -1,6 +1,7 @@
 import { HomeContainer as Container } from '../styles/home';
 import apiClient from '../service/api-client';
 import { useState, useEffect } from 'react';
+import Footer from '../components/Footer';
 import backgroundImg from '../assets/images/op.jpg';
 import {
 	FaCat,
@@ -8,6 +9,7 @@ import {
 	IoBalloon,
 	IoCopy,
 	IoTrash,
+	IoWarning,
 } from 'react-icons/all';
 
 interface IUrls {
@@ -170,12 +172,8 @@ export default function Home(): JSX.Element {
 					</section>
 				</article>
 			</main>
-			<footer>
-				<div>
-					Copyright &copy; 2022 <i>Kain Nhantumbo</i>
-				</div>
-				<div>All Rights Reserved.</div>
-			</footer>
+
+			<Footer />
 		</Container>
 	);
 }
