@@ -1,6 +1,8 @@
 import { HomeContainer as Container } from '../styles/home';
 import apiClient from '../service/api-client';
 import { useState, useEffect } from 'react';
+import backgroundImg from '../assets/images/op.jpg';
+import { IoArrowForwardCircle, IoBalloon } from 'react-icons/all';
 
 interface IUrls {
 	id: string;
@@ -61,9 +63,11 @@ export default function Home(): JSX.Element {
 	return (
 		<Container>
 			<header>
+				<img src={backgroundImg} />
 				<div className='intro'>
 					<section className='logo'>
 						<div>
+							<IoBalloon/>
 							<span>Url Shortner</span>
 						</div>
 					</section>
@@ -91,18 +95,13 @@ export default function Home(): JSX.Element {
 			<main>
 				<article id='article'>
 					<form onSubmit={(e) => e.preventDefault()}>
-						<div>
-							<label htmlFor='long-url'>
-								<span>Your long url</span>
-							</label>
-							<input
-								type='text'
-								id='long-url'
-								value={inputValue}
-								onChange={(e) => setInputValue(e.target.value)}
-								placeholder={'Type your long url here'}
-							/>
-						</div>
+						<input
+							type='text'
+							value={inputValue}
+							onChange={(e) => setInputValue(e.target.value)}
+							placeholder={'Type your long url here'}
+						/>
+
 						<button
 							onClick={() => {
 								if (!inputValue) return;
@@ -110,6 +109,7 @@ export default function Home(): JSX.Element {
 								setInputValue('');
 							}}
 						>
+							<IoArrowForwardCircle/>
 							<span>Shorten</span>
 						</button>
 					</form>
