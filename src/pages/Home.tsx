@@ -2,7 +2,13 @@ import { HomeContainer as Container } from '../styles/home';
 import apiClient from '../service/api-client';
 import { useState, useEffect } from 'react';
 import backgroundImg from '../assets/images/op.jpg';
-import { IoArrowForwardCircle, IoBalloon } from 'react-icons/all';
+import {
+	FaCat,
+	FaPaperPlane,
+	IoBalloon,
+	IoCopy,
+	IoTrash,
+} from 'react-icons/all';
 
 interface IUrls {
 	id: string;
@@ -67,7 +73,7 @@ export default function Home(): JSX.Element {
 				<div className='intro'>
 					<section className='logo'>
 						<div>
-							<IoBalloon/>
+							<IoBalloon />
 							<span>Url Shortner</span>
 						</div>
 					</section>
@@ -77,7 +83,7 @@ export default function Home(): JSX.Element {
 				</div>
 
 				<div className='intro-complement'>
-					<h2>Free url shortner</h2>
+					<h2>Free Url Shortner</h2>
 					<p>
 						Unleash the power of the click using a simple, powerful and free url
 						shortner.
@@ -109,31 +115,58 @@ export default function Home(): JSX.Element {
 								setInputValue('');
 							}}
 						>
-							<IoArrowForwardCircle/>
+							<FaPaperPlane />
 							<span>Shorten</span>
 						</button>
 					</form>
-					<section className='urls-container'>
-						{urls.map((url) => (
-							<section key={url.id} id={url.id}>
-								<div className='urls'>
-									<div className='long-url'>
-										<span>{url.longUrl}</span>
-									</div>
-									<div className='short-url'>
-										<span>{url.shortUrl}</span>
-									</div>
-								</div>
-								<div className='actions'>
-									<button onClick={() => addToClipboard(url.shortUrl)}>
-										<span>Clear</span>
-									</button>
-									<button onClick={() => addToClipboard(url.shortUrl)}>
-										<span>Copy to clipboard</span>
-									</button>
-								</div>
-							</section>
-						))}
+					<section className='urls-wrapper'>
+						<h2>
+							<FaCat />
+							<span>Shortned Urls</span>
+						</h2>
+
+						<section className='urls-container'>
+							{urls
+								.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+								.map((url) => (
+									<section key={url.id} id={url.id} className='url'>
+										<div className='links'>
+											<a
+												href={url.longUrl}
+												target={'_blank'}
+												rel={'noreferrer noopener'}
+												className='long-url'
+												title={url.longUrl}
+											>
+												<span>{url.longUrl}</span>
+											</a>
+											<a
+												href={url.shortUrl}
+												target={'_blank'}
+												rel={'noreferrer noopener'}
+												className='short-url'
+											>
+												<span>{url.shortUrl}</span>
+											</a>
+										</div>
+										<div className='actions-container'>
+											<div className='date'>
+												<span>{url.createdAt}</span>
+											</div>
+											<div className='buttons'>
+												<button onClick={() => addToClipboard(url.shortUrl)}>
+													<IoTrash />
+													<span>Clear</span>
+												</button>
+												<button onClick={() => addToClipboard(url.shortUrl)}>
+													<IoCopy />
+													<span>Copy to clipboard</span>
+												</button>
+											</div>
+										</div>
+									</section>
+								))}
+						</section>
 					</section>
 				</article>
 			</main>
