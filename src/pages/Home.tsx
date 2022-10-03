@@ -8,8 +8,8 @@ import {
 	FaPaperPlane,
 	IoBalloon,
 	IoCopy,
+	IoLayers,
 	IoTrash,
-	IoWarning,
 } from 'react-icons/all';
 
 interface IUrls {
@@ -157,17 +157,25 @@ export default function Home(): JSX.Element {
 											</div>
 											<div className='buttons'>
 												<button onClick={() => addToClipboard(url.shortUrl)}>
-													<IoTrash />
-													<span>Clear</span>
-												</button>
-												<button onClick={() => addToClipboard(url.shortUrl)}>
 													<IoCopy />
 													<span>Copy to clipboard</span>
+												</button>
+												<button onClick={() => addToClipboard(url.shortUrl)}>
+													<IoTrash />
+													<span>Clear</span>
 												</button>
 											</div>
 										</div>
 									</section>
 								))}
+							{urls.length < 1 && (
+								<section className='no-urls'>
+									<div>
+										<IoLayers />
+										<h3>Your shortned urls will be placed here</h3>
+									</div>
+								</section>
+							)}
 						</section>
 					</section>
 				</article>

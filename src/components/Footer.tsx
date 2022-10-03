@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { ImBlog, ImLinkedin2 } from 'react-icons/im';
 import { motion } from 'framer-motion';
-import { IoDocument, IoDocuments, IoWarning } from 'react-icons/io5';
+import { IoDocuments, IoWarning } from 'react-icons/io5';
 
 interface FooterLinks {
 	name: string;
@@ -51,8 +51,9 @@ const Footer: FC = (): JSX.Element => {
 					This application was made for pratice, learn and for improving my
 					coding skills only. Do not use this application for commercial or
 					professional purposes but you're free to test. Please understand that
-					all saved shortned urls are periodicaly deleted from the database and
-					that will lead them to stop working. Thanks.
+					all saved shortned urls are periodicaly deleted from the database by
+					the back-end API to avoid higher server costs and that will lead them
+					to stop working. Thanks.
 				</p>
 			</section>
 			<h3>
