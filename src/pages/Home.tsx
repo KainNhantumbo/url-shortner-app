@@ -1,39 +1,8 @@
 import { HomeContainer as Container } from '../styles/home';
 import { useAppContext } from '../context/AppContext';
 
-interface IUrls {
-	id: string;
-	longUrl: string;
-	shortUrl: string;
-	createdAt: string;
-}
-
 export default function Home(): JSX.Element {
-	const urls: IUrls[] = [
-		{
-			id: 'sdfsdfsdf',
-			createdAt: '2022-10-02T16:44:16.756Z',
-			longUrl: 'https://www.digistore24.com/redir/283755/kaynee-tech/',
-			shortUrl: 'https://bit.ly/3RGYMbN',
-		},
-		{
-			id: 'sdfsdfssdfdf',
-			createdAt: '2022-10-02T16:44:16.756Z',
-			longUrl: 'https://www.google.com/redir/283755/kaynee-tech/',
-			shortUrl: 'https://bit.ly/3RGfgtYMbN',
-		},
-	];
-
-	async function addToClipboard(data: string) {
-		try {
-			const clipboard = navigator.clipboard;
-			await clipboard.writeText(data);
-		} catch (err) {
-			console.error(err);
-		}
-	}
-
-	console.log(new Date().toISOString());
+	const { urls, addToClipboard } = useAppContext();
 	return (
 		<Container>
 			<header>
@@ -66,6 +35,7 @@ export default function Home(): JSX.Element {
 							<label htmlFor='long-url'>
 								<span>Your long url</span>
 							</label>
+							<input type="text" id='long-url' onChange={(e)=>{}} />
 						</div>
 						<button type='submit'>
 							<span>Shorten</span>
