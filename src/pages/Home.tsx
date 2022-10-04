@@ -32,30 +32,28 @@ export default function Home(): JSX.Element {
 				method: 'post',
 				data: { url: longUrl },
 			});
-			setUrls((prevData) => handleData(prevData, data));
+			setUrls((prevData) => {
+				const exists = prevData.some((value) =>
+					value.id === data._id ? true : false
+				);
+
+				if (!exists) {
+					return [
+						...prevData,
+						{
+							id: data._id,
+							shortUrl: data.shortUrl,
+							createdAt: data.createdAt,
+							longUrl: data.fullUrl,
+						},
+					];
+				}
+				return prevData;
+			});
+			localStorage.setItem('urls', JSON.stringify(urls));
 		} catch (err) {
 			console.error(err);
 		}
-	}
-
-	function handleData(prevData: IUrls[], data: any): IUrls[] {
-		const exists = prevData.some((value) =>
-			value.id === data._id ? true : false
-		);
-
-		if (!exists) {
-			const newUrlData: IUrls = {
-				id: data._id,
-				shortUrl: data.shortUrl,
-				createdAt: data.createdAt,
-				longUrl: data.fullUrl,
-			};
-
-			prevData.push(newUrlData);
-			localStorage.setItem('urls', JSON.stringify(prevData));
-			return prevData;
-		}
-		return prevData;
 	}
 
 	async function addToClipboard(data: string): Promise<void> {
@@ -82,8 +80,15 @@ export default function Home(): JSX.Element {
 	useEffect(() => {
 		const savedUrls: IUrls[] = JSON.parse(localStorage.getItem('urls') || `[]`);
 		setUrls(savedUrls);
-		console.log(savedUrls)
+		console.log(savedUrls);
 	}, []);
+
+	useEffect(() => {
+		const saveHistory = setTimeout(() => {
+			localStorage.setItem('urls', JSON.stringify(urls));
+		}, 2000);
+		return () => clearTimeout(saveHistory);
+	}, [urls]);
 
 	return (
 		<Container>
