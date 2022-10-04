@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { StyledInputs } from './generics/form';
 
 export const HomeContainer = styled.div`
 	display: flex;
@@ -203,6 +202,7 @@ export const HomeContainer = styled.div`
 						box-shadow: 0 0 1px rgba(${({ theme }) => theme.accent}, 0.3);
 						background: rgb(${({ theme }) => theme.foreground});
 						padding: 20px;
+						width: 100%;
 						max-width: 700px;
 						display: flex;
 						flex-direction: column;

@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 import { HomeContainer as Container } from '../styles/home';
 import apiClient from '../service/api-client';
-import { useState, useEffect } from 'react';
 import moment from 'moment';
 import Footer from '../components/Footer';
 import backgroundImg from '../assets/images/op.jpg';
@@ -22,10 +23,7 @@ interface IUrls {
 
 export default function Home(): JSX.Element {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [urls, setUrls] = useState<IUrls[]>(() => {
-		const jsonValue = JSON.parse(localStorage.getItem('urls') || `[]`);
-		return jsonValue;
-	});
+	const [urls, setUrls] = useState<IUrls[]>([]);
 
 	async function getShortUrl(longUrl: string): Promise<void> {
 		try {
@@ -75,13 +73,17 @@ export default function Home(): JSX.Element {
 
 	function deleteUrl(urlId: string): void {
 		const otherUrls = urls.filter((url) => {
-			if (url.id != urlId) return url
-		
+			if (url.id != urlId) return url;
 		});
 		setUrls(otherUrls);
 		localStorage.setItem('urls', JSON.stringify(otherUrls));
-		console.log(otherUrls)
+		console.log(otherUrls);
 	}
+
+	useEffect(() => {
+		const savedUrls = JSON.parse(localStorage.getItem('urls') || `[]`);
+		setUrls(savedUrls);
+	}, []);
 
 	return (
 		<Container>
@@ -101,17 +103,22 @@ export default function Home(): JSX.Element {
 
 				<div className='intro-complement'>
 					<h2>Free Url Shortner</h2>
-					<p>
-						Unleash the power of the click using a simple, powerful and free url
-						shortner.
-					</p>
+
+					<TypeAnimation
+						wrapper='p'
+						speed={50}
+						sequence={[
+							'Unleash the power of the click using a simple, powerful and free url shortner.',
+						]}
+					/>
 					<p>
 						A service that takes long urls and squeezes them into fewer
 						characters to make a link that is much easier to share to your
 						friends.
 					</p>
+
 					<a href='#article'>
-						<span>Get Started</span>
+						<span>Get Started!</span>
 					</a>
 				</div>
 			</header>
