@@ -4,21 +4,15 @@ This is a **Url Shortner application** built with React.JS and Typescript that p
 
 **Here are some screenshots:**\
 \
-![](./src/docs/img/login-tab.jpeg)
-![](./src/docs/img/main-tab.jpeg)
-![](./src/docs/img/settings-tab.jpeg)
-![](./src/docs/img/v2.jpeg)
-![](./src/docs/img/v5.jpeg)
+![](./src/assets/images/preview.jpeg)
 
 ## Version 0.9.0 (beta)
 
-Finally, I just released the first stable version of the app. Has the development goes further I will be listing the introduced and new application features. For now, they are:
+Has the development goes further I will be listing the introduced and new application features. By now, they are:
 
-- This application is able to perform all CRUD operations to manipulate data to accomplish its purposes.
+- Short long urls, view and delete shortned urls history. This history is saved on localstorage.
 
-- Built from scratch, a custom, beautiful and clean user interface, all built powered with styled-components, and ofcourse, animations.
-
-- Has more than just default dark and light themes, for now, there are 4 themes to choose, between light and dark themes. Uses the browser localStorage to save user theme preferences.
+- Built from scratch, a custom, beautiful and clean user interface, all built powered with styled-components, and ofcourse, animations (with framer-motion).
 
 ## Scripts for testing
 
