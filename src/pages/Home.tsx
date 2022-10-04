@@ -77,7 +77,6 @@ export default function Home(): JSX.Element {
 		});
 		setUrls(otherUrls);
 		localStorage.setItem('urls', JSON.stringify(otherUrls));
-		console.log(otherUrls);
 	}
 
 	useEffect(() => {
