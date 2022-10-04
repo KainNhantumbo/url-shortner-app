@@ -69,8 +69,18 @@ export default function Home(): JSX.Element {
 		}
 	}
 
-	function formatDate (date: string): string {
-return moment(date).calendar()
+	function formatDate(date: string): string {
+		return moment(date).calendar();
+	}
+
+	function deleteUrl(urlId: string): void {
+		const otherUrls = urls.filter((url) => {
+			if (url.id != urlId) return url
+		
+		});
+		setUrls(otherUrls);
+		localStorage.setItem('urls', JSON.stringify(otherUrls));
+		console.log(otherUrls)
 	}
 
 	return (
@@ -165,7 +175,7 @@ return moment(date).calendar()
 													<IoCopy />
 													<span>Copy to clipboard</span>
 												</button>
-												<button onClick={() => addToClipboard(url.shortUrl)}>
+												<button onClick={() => deleteUrl(url.id)}>
 													<IoTrash />
 													<span>Clear</span>
 												</button>
