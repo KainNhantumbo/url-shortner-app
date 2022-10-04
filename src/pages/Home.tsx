@@ -80,8 +80,9 @@ export default function Home(): JSX.Element {
 	}
 
 	useEffect(() => {
-		const savedUrls = JSON.parse(localStorage.getItem('urls') || `[]`);
+		const savedUrls: IUrls[] = JSON.parse(localStorage.getItem('urls') || `[]`);
 		setUrls(savedUrls);
+		console.log(savedUrls)
 	}, []);
 
 	return (
