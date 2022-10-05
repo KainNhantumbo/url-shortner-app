@@ -1,12 +1,14 @@
-# Url Shortner App
+# Url Shortner App (React + Typescript)
 
-This is a **Url Shortner application** built with React.JS and Typescript that provides a common basic url shortner service. You can find the API source code [here](https://github.com/KainNhantumbo/url-shortner-api).
+This is a **Url Shortner application** built with React.JS and Typescript that provides a common basic url shortner service. You can find the back-end Rest API source code [here](https://github.com/KainNhantumbo/url-shortner-api).
+
+**Access this app live at: [https://url-shortner-app-six.vercel.app](https://url-shortner-app-six.vercel.app)**
 
 **Here are some screenshots:**\
 \
 ![](./src/assets/images/preview.jpeg)
 
-## Version 0.9.0 (beta)
+## Version 0.9.1 (beta)
 
 Has the development goes further I will be listing the introduced and new application features. By now, they are:
 
