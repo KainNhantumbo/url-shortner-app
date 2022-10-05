@@ -91,7 +91,6 @@ export default function Home(): JSX.Element {
 	useEffect(() => {
 		const savedUrls: IUrls[] = JSON.parse(localStorage.getItem('urls') || `[]`);
 		setUrls(savedUrls);
-		console.log(savedUrls);
 	}, []);
 
 	useEffect(() => {

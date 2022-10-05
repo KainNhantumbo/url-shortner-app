@@ -21,6 +21,10 @@ export const HomeContainer = styled.div`
 			width: 100%;
 			height: 110%;
 			filter: opacity(90%) brightness(0.4);
+
+			@media screen and (max-width: 360px) {
+				height: 105%;
+			}
 		}
 
 		.intro,
@@ -63,6 +67,10 @@ export const HomeContainer = styled.div`
 			max-width: 1100px;
 			margin-top: 50px;
 
+			@media screen and (max-width: 360px) {
+				font-size: 1.8rem;
+				font-weight: 500;
+			}
 			h2 {
 				font-family: inter;
 				font-weight: 600;
@@ -77,7 +85,13 @@ export const HomeContainer = styled.div`
 				border-radius: 40px;
 				font-size: 1.4rem;
 				font-family: inter;
-				margin-top: 50px;
+				margin-top: 40px;
+
+				@media screen and (max-width: 360px) {
+					font-size: 1rem;
+					padding: 1px 15px;
+					margin-top: 20px;
+				}
 			}
 		}
 	}
@@ -85,6 +99,10 @@ export const HomeContainer = styled.div`
 	main {
 		padding: 0 20px;
 		width: 100%;
+
+		@media screen and (max-width: 360px) {
+			padding: 0 12px;
+		}
 		article {
 			display: flex;
 			flex-direction: column;
@@ -118,6 +136,15 @@ export const HomeContainer = styled.div`
 						color: rgba(${({ theme }) => theme.font}, 0.8);
 						font-size: 1rem;
 					}
+
+					@media screen and (max-width: 360px) {
+						font-size: 0.9rem;
+						padding: 8px;
+
+						::placeholder {
+							font-size: 0.89rem;
+						}
+					}
 				}
 
 				button {
@@ -145,6 +172,19 @@ export const HomeContainer = styled.div`
 						padding-right: 20px;
 						font-weight: 500;
 						pointer-events: none;
+					}
+
+					@media screen and (max-width: 360px) {
+						svg {
+							width: 16px;
+							height: 16px;
+							top: calc(50% - 8px);
+						}
+
+						span {
+							padding-right: 18px;
+							font-size: 0.9rem;
+						}
 					}
 				}
 			}
@@ -189,6 +229,7 @@ export const HomeContainer = styled.div`
 				}
 
 				.urls-container {
+					width: 100%;
 					display: flex;
 					flex-direction: column;
 					gap: 15px;
@@ -231,7 +272,7 @@ export const HomeContainer = styled.div`
 						background: rgb(${({ theme }) => theme.foreground});
 						padding: 20px;
 						width: 100%;
-						max-width: 1100px;
+						max-width: 700px;
 						display: flex;
 						flex-direction: column;
 						gap: 10px;
@@ -239,6 +280,10 @@ export const HomeContainer = styled.div`
 						border-radius: 15px;
 						word-wrap: break-word;
 						word-break: break-all;
+
+						@media screen and (max-width: 360px) {
+							padding: 15px 12px;
+						}
 
 						:first-child {
 							border: 2px solid rgb(${({ theme }) => theme.primary});
@@ -304,6 +349,7 @@ export const HomeContainer = styled.div`
 										color: rgb(${({ theme }) => theme.font});
 										background: rgb(${({ theme }) => theme.secondary});
 									}
+
 									svg {
 										width: 20px;
 										height: 20px;
@@ -316,6 +362,20 @@ export const HomeContainer = styled.div`
 										padding-right: 20px;
 										font-weight: 500;
 										pointer-events: none;
+									}
+
+									@media screen and (max-width: 360px) {
+										padding: 5px;
+										font-size: 0.9rem;
+										svg {
+											width: 14px;
+											height: 14px;
+											top: calc(50% - 7px);
+										}
+
+										span {
+											padding-right: 18px;
+										}
 									}
 								}
 							}
