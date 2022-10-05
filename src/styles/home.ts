@@ -109,6 +109,7 @@ export const HomeContainer = styled.div`
 					background: rgb(${({ theme }) => theme.background});
 					border: 2px solid rgb(${({ theme }) => theme.primary});
 					border-right: none;
+					background: rgb(${({ theme }) => theme.neutral});
 					:focus {
 						border: 2px solid rgb(${({ theme }) => theme.secondary});
 						border-right: none;
@@ -148,6 +149,28 @@ export const HomeContainer = styled.div`
 				}
 			}
 
+			.error {
+				display: grid;
+				place-content: center;
+				font-size: 1.1rem;
+				font-weight: 600;
+				div {
+					color: rgb(${({ theme }) => theme.neutral});
+					padding: 10px 15px;
+					border-radius: 3px;
+					display: flex;
+					gap: 8px;
+					flex-flow: row nowrap;
+					align-items: center;
+					background: rgb(${({ theme }) => theme.primary});
+
+					svg {
+						width: 22px;
+						height: 22px;
+					}
+				}
+			}
+
 			.urls-wrapper {
 				display: flex;
 				flex-direction: column;
@@ -168,9 +191,15 @@ export const HomeContainer = styled.div`
 				.urls-container {
 					display: flex;
 					flex-direction: column;
-					gap: 10px;
+					gap: 15px;
 					align-items: center;
 					justify-content: center;
+
+					.cut-dots {
+						width: 40px;
+						height: 40px;
+						color: rgb(${({ theme }) => theme.secondary});
+					}
 
 					.no-urls {
 						width: 100%;
@@ -178,24 +207,23 @@ export const HomeContainer = styled.div`
 						line-height: 1.6rem;
 						font-size: 1.4rem;
 						font-weight: 500;
-            display: grid;
-            place-content: center;
-            background: rgb(${({ theme }) => theme.alternative_a});
-            padding: 40px;
-            border-radius: 20px;
+						display: grid;
+						place-content: center;
+						background: rgb(${({ theme }) => theme.alternative_a});
+						padding: 40px;
+						border-radius: 20px;
 
-            div {
-              display: flex;
-              align-items: center;
-              flex-direction: column;
-              gap: 20px;
-            } 
+						div {
+							display: flex;
+							align-items: center;
+							flex-direction: column;
+							gap: 20px;
+						}
 
-            svg {
-              width: 70px;
-              height: 70px;
-            }
-
+						svg {
+							width: 70px;
+							height: 70px;
+						}
 					}
 
 					.url {
@@ -203,7 +231,7 @@ export const HomeContainer = styled.div`
 						background: rgb(${({ theme }) => theme.foreground});
 						padding: 20px;
 						width: 100%;
-						max-width: 700px;
+						max-width: 1100px;
 						display: flex;
 						flex-direction: column;
 						gap: 10px;
@@ -211,6 +239,11 @@ export const HomeContainer = styled.div`
 						border-radius: 15px;
 						word-wrap: break-word;
 						word-break: break-all;
+
+						:first-child {
+							border: 2px solid rgb(${({ theme }) => theme.primary});
+							box-shadow: 0 0 1px rgba(${({ theme }) => theme.primary}, 0.3);
+						}
 
 						:hover {
 							box-shadow: 0 0 25px rgba(${({ theme }) => theme.accent}, 0.1);

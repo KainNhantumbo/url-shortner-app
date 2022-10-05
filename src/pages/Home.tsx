@@ -8,11 +8,14 @@ import backgroundImg from '../assets/images/op.jpg';
 import {
 	FaCat,
 	FaPaperPlane,
+	HiDotsHorizontal,
 	IoBalloon,
 	IoCopy,
 	IoLayers,
 	IoTrash,
+	IoWarning,
 } from 'react-icons/all';
+import { motion } from 'framer-motion';
 
 interface IUrls {
 	id: string;
@@ -23,6 +26,7 @@ interface IUrls {
 
 export default function Home(): JSX.Element {
 	const [inputValue, setInputValue] = useState<string>('');
+	const [errorMessage, setErrorMessage] = useState<string>('');
 	const [urls, setUrls] = useState<IUrls[]>([]);
 
 	async function getShortUrl(longUrl: string): Promise<void> {
@@ -37,7 +41,7 @@ export default function Home(): JSX.Element {
 					value.id === data._id ? true : false
 				);
 
-				if (!exists) {
+				if (!exists)
 					return [
 						...prevData,
 						{
@@ -47,12 +51,12 @@ export default function Home(): JSX.Element {
 							longUrl: data.fullUrl,
 						},
 					];
-				}
+
 				return prevData;
 			});
-			localStorage.setItem('urls', JSON.stringify(urls));
 		} catch (err) {
 			console.error(err);
+			handleErrors(err);
 		}
 	}
 
@@ -66,7 +70,14 @@ export default function Home(): JSX.Element {
 	}
 
 	function formatDate(date: string): string {
-		return moment(date).calendar();
+		return moment(date).fromNow();
+	}
+
+	function handleErrors(err: any) {
+		setErrorMessage(err.response?.data?.message);
+		setTimeout(() => {
+			setErrorMessage('');
+		}, 5000);
 	}
 
 	function deleteUrl(urlId: string): void {
@@ -86,7 +97,7 @@ export default function Home(): JSX.Element {
 	useEffect(() => {
 		const saveHistory = setTimeout(() => {
 			localStorage.setItem('urls', JSON.stringify(urls));
-		}, 2000);
+		}, 500);
 		return () => clearTimeout(saveHistory);
 	}, [urls]);
 
@@ -148,6 +159,16 @@ export default function Home(): JSX.Element {
 							<span>Shorten</span>
 						</button>
 					</form>
+
+					{errorMessage && (
+						<motion.section className='error'>
+							<div>
+								<IoWarning />
+								<span>{errorMessage}</span>
+							</div>
+						</motion.section>
+					)}
+
 					<section className='urls-wrapper'>
 						<h2>
 							<FaCat />
@@ -183,19 +204,27 @@ export default function Home(): JSX.Element {
 												<span>{formatDate(url.createdAt)}</span>
 											</div>
 											<div className='buttons'>
-												<button onClick={() => addToClipboard(url.shortUrl)}>
+												<motion.button
+													whileHover={{ scale: 1.05 }}
+													whileTap={{ scale: 0.9 }}
+													onClick={() => addToClipboard(url.shortUrl)}
+												>
 													<IoCopy />
 													<span>Copy to clipboard</span>
-												</button>
-												<button onClick={() => deleteUrl(url.id)}>
+												</motion.button>
+												<motion.button
+													whileHover={{ scale: 1.05 }}
+													whileTap={{ scale: 0.9 }}
+													onClick={() => deleteUrl(url.id)}
+												>
 													<IoTrash />
 													<span>Clear</span>
-												</button>
+												</motion.button>
 											</div>
 										</div>
 									</section>
 								))}
-							{urls.length < 1 && (
+							{urls.length == 0 && (
 								<section className='no-urls'>
 									<div>
 										<IoLayers />
@@ -203,6 +232,7 @@ export default function Home(): JSX.Element {
 									</div>
 								</section>
 							)}
+							{urls.length > 0 && <HiDotsHorizontal className='cut-dots' />}
 						</section>
 					</section>
 				</article>

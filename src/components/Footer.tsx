@@ -74,7 +74,7 @@ export default function Footer(): JSX.Element {
 				})}
 			</ul>
 			<div>
-				<span>Url Shortner App - Version 0.9.0 (beta)</span>
+				<span>Url Shortner App - Version 0.9.1 (beta)</span>
 				<span>Copyright &copy; 2022 Kain Nhantumbo. All Rights Reserved. </span>
 				<span>Licensed under Apache License 2.0</span>
 			</div>
