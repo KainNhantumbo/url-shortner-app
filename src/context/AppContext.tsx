@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { lightTheme } from '../theme/lightTheme';
+import { lightTheme } from '../themes/lightTheme';
 import { useContext, createContext } from 'react';
 import GlobalStylesheet from '../styles/common/global';
 
